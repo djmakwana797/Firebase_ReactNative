@@ -1,6 +1,6 @@
 import firestore from '@react-native-firebase/firestore'
 
-const addproduct = (productName, price) => {
+const addproduct = (productName, price, image) => {
     if(!productName||!price) alert('Please enater all details')
 
     return firestore()
@@ -8,7 +8,8 @@ const addproduct = (productName, price) => {
     .doc()
     .set({
         productName,
-        price
+        price,
+        image
     })
     .catch(err => console.log(err))
 }

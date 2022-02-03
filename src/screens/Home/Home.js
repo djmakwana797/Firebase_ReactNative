@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, ScrollView, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import CustomButton from '../../components/CustomButton';
 import { Auth } from '../../services';
@@ -14,14 +14,14 @@ const Home = ({ navigation }) => {
   const isFocused = useIsFocused()
 
   useEffect(() => {
-    if(isFocused){
-    Product.getProduct()
-      .then(prod =>
-        setproducts(prod),
-        setloading(false),
-        console.log(products)
-      )
-      .catch(err => console.log(err))
+    if (isFocused) {
+      Product.getProduct()
+        .then(prod =>
+          setproducts(prod),
+          setloading(false),
+          console.log(products)
+        )
+        .catch(err => console.log(err))
     }
   }, [isFocused]);
 
@@ -38,8 +38,10 @@ const Home = ({ navigation }) => {
               key={index}
               style={styles.products}
             >
-              <Text style={styles.productxt}>{data.productName}</Text>
-              <Text style={styles.productxt}>{data.price}</Text>
+
+              <Image source={{ uri: data.image }} style={{ height: 100, width: 100, margin: 8 }} />
+                <Text style={styles.productxt}>{data.productName}</Text>
+                <Text style={styles.productxt}>{data.price}</Text>
             </View>
           ))
         }
@@ -58,16 +60,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   products: {
+    justifyContent: 'space-around',
     borderRadius: 5,
     backgroundColor: '#fff',
     flexDirection: 'row',
-    justifyContent :'space-between',
+    justifyContent: 'space-between',
     marginVertical: 4
   },
-  productxt:{
+  productxt: {
     fontSize: 20,
     color: 'orange',
-    padding: 8
+    marginHorizontal : 30,
+    alignSelf: 'center'
   }
 })
 
